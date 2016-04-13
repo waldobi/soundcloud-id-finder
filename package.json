@@ -1,0 +1,11 @@
+{
+  "name": "soundcloud-id-finder",
+  "version": "0.0.1",
+  "description": "A simple node app for getting the track ID of a SoundCloud URL",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Worth Baker",
+  "license": "MIT"
+}
