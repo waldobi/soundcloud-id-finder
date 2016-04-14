@@ -11,8 +11,10 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
+app.use(express.static('src'));
+
 app.get('/',function(req,res){
-  res.sendFile(path.join(__dirname+'/index.html'));
+  res.sendFile(path.join(__dirname+'/src/index.html'));
 });
 
 app.post('/', function(req, res){
@@ -25,7 +27,7 @@ app.post('/', function(req, res){
       res.end();
     } else {
       res.status(200);
-      res.send('<p>URL: ' + url + '\n</p><p>SoundCloud Track ID: ' + trackID + '</p>')
+      res.send('<p><b>URL</b>: ' + url + '\n</p><p><b>SoundCloud Track ID:</b> ' + trackID + '</p>')
       res.end();
     }
 
