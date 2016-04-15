@@ -25,14 +25,18 @@ module.exports = function(originalURL, callback) {
       callback(e, null);
       return;
     }).on('end', function() {
-      var body = Buffer.concat(bodyChunks);
+      try {
+        var body = Buffer.concat(bodyChunks);
 
-      if (body) {
         try {
           var url = JSON.parse(body).location
 
-          https.get(url, function(res) {
+          if (!url) {
+            callback('invalid url', null)
+            return
+          }
 
+          https.get(url, function(res) {
             var finalChunks = [];
             res.on('data', function(chunk) {
               finalChunks.push(chunk);
@@ -47,6 +51,9 @@ module.exports = function(originalURL, callback) {
         } catch (e) {
           callback(e, null);
         }
+
+      } catch (e) {
+        callback(e, null);
       }
     })
   });

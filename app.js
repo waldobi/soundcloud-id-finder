@@ -39,10 +39,10 @@ app.post('/soundcloud/json', function(req, res) {
 
   getsoundcloud(url, function(err, trackID) {
     if (err) {
-      console.log('SOUNDCLOUD ERROR');
+      console.log('SOUNDCLOUD ERROR ' + err);
       res.status(500);
       res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify({ error: 'soundcloud error' }));
+      res.send(JSON.stringify({ error: 'application error: ' + err }));
       res.end();
     } else {
       res.status(200);
