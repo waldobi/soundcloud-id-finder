@@ -41,7 +41,8 @@ app.post('/soundcloud/json', function(req, res) {
     if (err) {
       console.log('SOUNDCLOUD ERROR');
       res.status(500);
-      res.send('Hmmm... an error occurred. Might have been an invalid URL?')
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({ error: 'soundcloud error' }));
       res.end();
     } else {
       res.status(200);
