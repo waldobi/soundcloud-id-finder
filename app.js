@@ -13,15 +13,16 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 app.use(express.static('src'));
 
-app.get('/',function(req,res){
+app.get('/soundcloud',function(req,res){
   res.sendFile(path.join(__dirname+'/src/index.html'));
 });
 
-app.post('/', function(req, res){
+app.post('/soundcloud', function(req, res){
   var url = req.body.scURL
-  console.log('hello');
+ //  console.log('hello');
   getsoundcloud(url, function(err, trackID) {
     if (err) {
+	console.log('SOUNDCLOUD ERROR');
       res.status(500);
       res.send('<h1>An internal error occured.</h1>')
       res.end();
@@ -35,6 +36,6 @@ app.post('/', function(req, res){
   })
 })
 
-app.listen(3000, function() {
+app.listen(6789, function() {
   console.log('LISTENING');
 });
