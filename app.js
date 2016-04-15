@@ -22,7 +22,7 @@ app.post('/soundcloud', function(req, res){
  //  console.log('hello');
   getsoundcloud(url, function(err, trackID) {
     if (err) {
-	console.log('SOUNDCLOUD ERROR');
+	    console.log('SOUNDCLOUD ERROR');
       res.status(500);
       res.send('<h1>An internal error occured.</h1>')
       res.end();
@@ -31,10 +31,26 @@ app.post('/soundcloud', function(req, res){
       res.send('<p><b>URL</b>: ' + url + '\n</p><p><b>SoundCloud Track ID:</b> ' + trackID + '</p>')
       res.end();
     }
-
-
   })
 })
+
+app.post('/soundcloud/json', function(req, res) {
+  var url = req.body.soundcloudURL
+
+  getsoundcloud(url, function(err, trackID) {
+    if (err) {
+      console.log('SOUNDCLOUD ERROR');
+      res.status(500);
+      res.send('Hmmm... an error occurred. Might have been an invalid URL?')
+      res.end();
+    } else {
+      res.status(200);
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({ trackID: trackID }));
+      res.end();
+    }
+  })
+});
 
 app.listen(6789, function() {
   console.log('LISTENING');
